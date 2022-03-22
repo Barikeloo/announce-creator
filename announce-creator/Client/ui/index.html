@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Announce Creator</title>
+</head>
+<body>
+    <div class="container" id="app" v-if="opened">
+        <div class="left-panel">
+            <div class="header">Announce creator</div>
+            <div class="option" v-on:click="setPage('create')">
+                <label>Create</label>
+            </div>
+            <div class="option" v-on:click="setPage('presets')">
+                <label>Presets</label>
+            </div>
+        </div>
+        <div class="right-panel" v-if="page == 'create'">
+            <div class="title">CREATE</div>
+            <input class="input bloque-texto" id="text-input" type="text" />
+            <button class="button-style" v-on:click="sendAlert()">SEND</button>
+        </div>
+        <div class="right-panel" v-if="page == 'presets'">
+            <div class="title">PRESETS</div>
+                <div class="container-presets">
+                    <div class="preset" v-if="job == item.job" v-for="item in presets">
+                        <div class="type">{{ item.type }}</div>
+                        <div class="message">{{ item.msg }}</div>
+                        <button class="button" id="send" v-on:click="sendPresetAnnounce(item)">SEND</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="bloque-anuncio">
+        <div class="anuncio"></div>
+        <div class="bloque-header"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
