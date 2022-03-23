@@ -40,7 +40,7 @@ $(function () {
             app.job = v.job
         } else if (v.action = 'execute'){
             let duration = 4
-            $(".anuncio").html(event.data.content.msg)
+            $(".anuncio").text(event.data.content.msg)
             $(".bloque-anuncio").fadeIn(200)
             if (app.job == 'police') {
                 $(".bloque-header").text('POLICIA')
