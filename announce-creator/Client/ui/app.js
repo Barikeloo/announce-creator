@@ -14,9 +14,20 @@ var app = new Vue({
         sendAlert: function(){
            let string = $("#text-input").val()
             let obj = {
-                msg : string
-            }    
+                msg : string,
+                job : this.job
+            }
+            
+            if (this.job == 'police'){
+                obj.job = 'POLICIA'
+            } else if(this.job == 'mechanic'){
+                obj.job = 'MECANICO'
+            } else if (this.job == 'ambulance'){ 
+                obj.job = 'AMBULANCIA'
+            }
+
             $.post('https://announce-creator/send', JSON.stringify({obj}));
+            console.log(JSON.stringify({obj}))
         },
         sendPresetAnnounce: function(obj) {
             $.post('https://announce-creator/send', JSON.stringify({obj}));
@@ -40,15 +51,9 @@ $(function () {
             app.job = v.job
         } else if (v.action = 'execute'){
             let duration = 4
-            $(".anuncio").text(event.data.content.msg)
+            $(".anuncio").text(v.content.msg)
+            $(".bloque-header").text(v.content.job)
             $(".bloque-anuncio").fadeIn(200)
-            if (app.job == 'police') {
-                $(".bloque-header").text('POLICIA')
-            } else if (app.job == 'ambulance') {
-                $(".bloque-header").text('EMS')
-            } else if (app.job == 'mechanic') {
-                $(".bloque-header").text('MECANICO')
-            }
             setTimeout(() => {
                 $(".bloque-anuncio").fadeOut(200)
             }, duration * 1000);

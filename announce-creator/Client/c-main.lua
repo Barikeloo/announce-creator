@@ -30,4 +30,5 @@ RegisterNetEvent('announce:sendForAll', function(data)
         action = 'execute',
         content = data
     })
+    print(json.encode(data))
 end)
